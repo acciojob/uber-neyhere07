@@ -1,61 +1,49 @@
-
 package com.driver.model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "TripBooking")
 public class TripBooking{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int tripBookingId;
+    int tripBookingId;
 
-    private String fromLocation;
+    String fromLocation;
 
-    private String toLocation;
+    String toLocation;
 
-    private int distanceInKm;
+    int distanceInKm;
 
-    @Enumerated(EnumType.STRING)
-    private TripStatus status;
+    TripStatus status;
 
-    public TripStatus getStatus() {
-        return status;
+    int bill;
+
+
+    //For mapping to customer(parent)
+    @ManyToOne
+    @JoinColumn
+    Customer customer;
+
+    //For mapping to driver(parent)
+    @ManyToOne
+    @JoinColumn
+    Driver driver;
+
+    public TripBooking() {
+
     }
 
-    public void setStatus(TripStatus status) {
+    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Customer customer, Driver driver) {
+        this.tripBookingId = tripBookingId;
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
+        this.distanceInKm = distanceInKm;
         this.status = status;
-    }
-
-    private int bill;
-
-    public int getBill() {
-        return bill;
-    }
-
-    public void setBill(int bill) {
         this.bill = bill;
+        this.customer = customer;
+        this.driver = driver;
     }
-
-    @ManyToOne
-    @JoinColumn
-    private Customer customer;
-
-
-    @ManyToOne
-    @JoinColumn
-    private Driver driver;
-
 
     public int getTripBookingId() {
         return tripBookingId;
@@ -87,6 +75,22 @@ public class TripBooking{
 
     public void setDistanceInKm(int distanceInKm) {
         this.distanceInKm = distanceInKm;
+    }
+
+    public TripStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TripStatus status) {
+        this.status = status;
+    }
+
+    public int getBill() {
+        return bill;
+    }
+
+    public void setBill(int bill) {
+        this.bill = bill;
     }
 
     public Customer getCustomer() {

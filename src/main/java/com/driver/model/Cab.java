@@ -1,45 +1,36 @@
 package com.driver.model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-@Table
+import javax.persistence.*;
 @Entity
+@Table(name = "Cab")
 public class Cab{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int Id;
 
-    private int perKmRate;
+    int perKmRate;
 
-    private boolean available;
+    boolean available;
 
 
+    //For mapping
     @OneToOne
     @JoinColumn
-    private Driver driver;
+    Driver driver;
 
-    public Driver getDriver() {
-        return driver;
-    }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+
+    public Cab() {
+
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
     public int getPerKmRate() {
@@ -57,4 +48,14 @@ public class Cab{
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver= driver;
+    }
+
+
 }
