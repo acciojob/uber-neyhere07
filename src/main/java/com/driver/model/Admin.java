@@ -1,3 +1,5 @@
+//Admin.java
+
 package com.driver.model;
 
 import javax.persistence.*;
